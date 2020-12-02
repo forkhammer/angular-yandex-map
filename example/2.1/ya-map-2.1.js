@@ -12,7 +12,8 @@ angular.module('yaMap',[]).
         var options = {
             version:'2.1',
             lang:'ru_RU',
-            order:'longlat'
+            order:'longlat',
+            apiKey: ''
         };
         this.setLanguage=function(lang){
             options.lang=lang;
@@ -22,6 +23,10 @@ angular.module('yaMap',[]).
             options.order = order;
             return this;
         };
+    this.setApiKey=function(key) {
+        options.apiKey = key;
+        return this;
+    }
         this.$get=[function(){
             return options;
         }];
@@ -37,7 +42,7 @@ angular.module('yaMap',[]).
                 callback[0]();
             }
         };
-        var loadUrl = '//api-maps.yandex.ru/'+yaMapSettings.version+'/?load=package.full&lang=' +
+        var loadUrl = '//api-maps.yandex.ru/'+yaMapSettings.version+'/?apiKey='+ yaMapSettings.apiKey +'load=package.full&lang=' +
             yaMapSettings.lang +'&coordorder=' +yaMapSettings.order;
         var _loading = false;
         var loadScript = function(url, callback){
